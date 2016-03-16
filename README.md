@@ -6,4 +6,5 @@
 3. Include zsh config
 4. Install essentials e.g. Python, zsh, pip, vim, tmux, node, npm
 5. Include git config
-
+6. Present options at install script start to only install certain
+   elements
