@@ -43,3 +43,6 @@ fi
 report "Linking vim configuration files"
 ln -sfv "$DOTFILES_DIR/vimfiles/vimrc" ~/.vimrc
 ln -sfv "$DOTFILES_DIR/vimfiles" ~/.vim
+
+# Tmux Setup
+ln -sfv "$DOTFILES_DIR/.tmux.conf" ~/.tmux.conf
