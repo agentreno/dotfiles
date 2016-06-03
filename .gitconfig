@@ -1,0 +1,16 @@
+[color]
+	ui = auto
+[alias]
+	st = status
+	di = diff
+	ci = commit
+	br = branch
+	llog = log --date=local
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+[push]
+	default = simple
+[user]
+	name = Karl
+	email = karl.turrell@buto.tv
+[credential]
+	helper = cache --timeout=3600
