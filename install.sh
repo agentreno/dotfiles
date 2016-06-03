@@ -46,3 +46,8 @@ ln -sfv "$DOTFILES_DIR/vimfiles" ~/.vim
 
 # Tmux Setup
 ln -sfv "$DOTFILES_DIR/.tmux.conf" ~/.tmux.conf
+
+# Install the vital stuff
+sudo apt-get -y install python python3 python-pip python3-pip
+sudo apt-get -y install nodejs npm
+sudo ln -sfv /usr/bin/nodejs /usr/bin/node
