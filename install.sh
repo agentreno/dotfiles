@@ -55,7 +55,9 @@ report "Installing hub"
 wget https://github.com/github/hub/releases/download/v2.2.3/hub-linux-amd64-2.2.3.tgz
 tar -xvf hub-linux-amd64-2.2.3.tgz
 sudo ./hub-linux-amd64-2.2.3/install
-eval "$(hub alias -s)"
+alias git=hub
+rm -rf hub-linux-amd64-2.2.3
+rm -rf hub-linux-amd64-2.2.3.tgz
 
 # Install the vital stuff
 report "Installing Python and Node tools"
