@@ -55,12 +55,12 @@ report "Installing hub"
 wget https://github.com/github/hub/releases/download/v2.2.3/hub-linux-amd64-2.2.3.tgz
 tar -xvf hub-linux-amd64-2.2.3.tgz
 sudo ./hub-linux-amd64-2.2.3/install
-alias git=hub
 rm -rf hub-linux-amd64-2.2.3
 rm -rf hub-linux-amd64-2.2.3.tgz
 
 # Install the vital stuff
 report "Installing Python and Node tools"
+sudo apt-get update
 sudo apt-get -y install python python3 python-pip python3-pip
 sudo apt-get -y install nodejs npm
 sudo ln -sfv /usr/bin/nodejs /usr/bin/node
