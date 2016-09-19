@@ -7,3 +7,4 @@
 4. Include zsh config, and add alias for hub to git, reload zshrc after install
 5. Present options at install script start to only install certain
    elements
+6. Automate getting an access token for 2FA Git
