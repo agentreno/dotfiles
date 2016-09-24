@@ -18,6 +18,13 @@ function report(){
    tput sgr0
 }
 
+# Install curl
+sudo apt-get -y install curl
+
+# Install Git
+sudo apt-get update
+sudo apt-get -y install git
+
 # Update dotfiles itself and all of it's submodules
 report "Updating dotfiles and submodules"
 [ -d "$DOTFILES_DIR/.git" ] && git-alt $DOTFILES_DIR pull origin master
@@ -60,16 +67,17 @@ rm -rf hub-linux-amd64-2.2.3
 rm -rf hub-linux-amd64-2.2.3.tgz
 
 # Install Python
-report "Installing Python and Node tools"
+report "Installing Python 2 and 3"
 sudo apt-get update
 sudo apt-get -y install python python3 python-pip python3-pip
 
 # Install Node
+report "Installing Node 4.5.0"
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-sudo apt-get -y install nodejs npm
+sudo apt-get -y install nodejs
 sudo ln -sfv /usr/bin/nodejs /usr/bin/node
 
 # Zsh and oh-my-zsh Setup
-sudo apt-get -y install zsh curl
+sudo apt-get -y install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
