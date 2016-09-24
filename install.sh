@@ -84,17 +84,14 @@ function get-work-dotfiles() {
    sh -c workdotfiles/install.sh
 }
 
-function install-work-dotfiles() {
-   while true; do
-      read -p "Do you want to install work dotfiles? " yn
-      case $yn in
-         [Yy]* ) report "Installing workdotfiles"; get-work-dotfiles; break;;
-         [Nn]* ) report "Continuing without work dotfiles";;
-         * ) echo "Please answer yes or no";;
-      esac
-   done
-}
-install-work-dotfiles
+while true; do
+   read -p "Do you want to install work dotfiles? " yn
+   case $yn in
+      [Yy]* ) report "Installing workdotfiles"; get-work-dotfiles; break;;
+      [Nn]* ) report "Continuing without work dotfiles";;
+      * ) echo "Please answer yes or no";;
+   esac
+done
 
 # Zsh and oh-my-zsh Setup
 ln -sdv "$DOTFILES_DIR/.zshrc" ~/.zshrc
