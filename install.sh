@@ -26,10 +26,9 @@ git submodule update --init --recursive
 popd > /dev/null
 
 # Zsh and oh-my-zsh Setup
-sudo apt-get install zsh
+sudo apt-get -y install zsh
 chsh -s $(which zsh)
-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Vim Setup
 # Rename any existing vimrc's or .vim/
