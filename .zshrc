@@ -15,7 +15,7 @@ alias git=hub
 # Helper functions
 function git-pull-master() {
    #get current branch
-   export BRANCH="$(git rev-parse --abrev-ref HEAD)"
+   export BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
    echo "Switching to master"
    git checkout master
@@ -28,5 +28,14 @@ function git-pull-master() {
 
    echo "Switching back to branch $BRANCH"
    git checkout $BRANCH
+}
+
+function git-delete-branch() {
+   if [[ -z "$1" ]]; then
+      echo "Need a branch ID"
+   else
+      git branch -D $1
+      git push origin --delete $1
+   fi
 }
 
