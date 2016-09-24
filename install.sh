@@ -25,14 +25,9 @@ pushd $DOTFILES_DIR > /dev/null
 git submodule update --init --recursive
 popd > /dev/null
 
-# Zsh and oh-my-zsh Setup
-sudo apt-get install zsh
-chsh -s $(which zsh)
-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
 # Vim Setup
 # Rename any existing vimrc's or .vim/
+sudo apt-get -y install vim
 if [ -d ~/.vim ];
 then
    report "Found existing ~/.vim folder, renaming to ~/.vimbak"
@@ -70,4 +65,8 @@ sudo apt-get update
 sudo apt-get -y install python python3 python-pip python3-pip
 sudo apt-get -y install nodejs npm
 sudo ln -sfv /usr/bin/nodejs /usr/bin/node
+
+# Zsh and oh-my-zsh Setup
+sudo apt-get -y install zsh curl
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
