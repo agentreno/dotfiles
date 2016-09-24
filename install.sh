@@ -59,10 +59,13 @@ sudo ./hub-linux-amd64-2.2.3/install
 rm -rf hub-linux-amd64-2.2.3
 rm -rf hub-linux-amd64-2.2.3.tgz
 
-# Install the vital stuff
+# Install Python
 report "Installing Python and Node tools"
 sudo apt-get update
 sudo apt-get -y install python python3 python-pip python3-pip
+
+# Install Node
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get -y install nodejs npm
 sudo ln -sfv /usr/bin/nodejs /usr/bin/node
 
