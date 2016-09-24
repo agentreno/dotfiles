@@ -81,4 +81,4 @@ sudo ln -sfv /usr/bin/nodejs /usr/bin/node
 # Zsh and oh-my-zsh Setup
 ln -sdv "$DOTFILES_DIR/.zshrc" ~/.zshrc
 sudo apt-get -y install zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c $DOTFILES_DIR/install-oh-my-zsh.sh
