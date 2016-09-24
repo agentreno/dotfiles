@@ -54,6 +54,7 @@ ln -sfv "$DOTFILES_DIR/vimfiles" ~/.vim
 
 # Tmux Setup
 report "Linking tmux config"
+sudo apt-get -y install tmux
 ln -sfv "$DOTFILES_DIR/.tmux.conf" ~/.tmux.conf
 
 # Git Setup
@@ -80,4 +81,4 @@ sudo ln -sfv /usr/bin/nodejs /usr/bin/node
 # Zsh and oh-my-zsh Setup
 sudo apt-get -y install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
+ln -sdv "$DOTFILES_DIR/.zshrc" ~/.zshrc
