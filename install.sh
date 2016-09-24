@@ -25,6 +25,12 @@ pushd $DOTFILES_DIR > /dev/null
 git submodule update --init --recursive
 popd > /dev/null
 
+# Zsh and oh-my-zsh Setup
+sudo apt-get install zsh
+chsh -s $(which zsh)
+zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 # Vim Setup
 # Rename any existing vimrc's or .vim/
 if [ -d ~/.vim ];
@@ -64,3 +70,4 @@ sudo apt-get update
 sudo apt-get -y install python python3 python-pip python3-pip
 sudo apt-get -y install nodejs npm
 sudo ln -sfv /usr/bin/nodejs /usr/bin/node
+
