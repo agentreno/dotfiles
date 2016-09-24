@@ -39,3 +39,5 @@ function git-delete-branch() {
    fi
 }
 
+# Credentials
+source ~/.credentials.sh 2> /dev/null
