@@ -78,6 +78,24 @@ curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get -y install nodejs
 sudo ln -sfv /usr/bin/nodejs /usr/bin/node
 
+# Optionally start work dotfiles setup
+function get-work-dotfiles() {
+   git clone git@github.com:agentreno/workdotfiles
+   sh -c workdotfiles/install.sh
+}
+
+function install-work-dotfiles() {
+   while true; do
+      read -p "Do you want to install work dotfiles? " yn
+      case $yn in
+         [Yy]* ) report "Installing workdotfiles"; get-work-dotfiles; break;;
+         [Nn]* ) report "Continuing without work dotfiles";;
+         * ) echo "Please answer yes or no";;
+      esac
+   done
+}
+install-work-dotfiles
+
 # Zsh and oh-my-zsh Setup
 ln -sdv "$DOTFILES_DIR/.zshrc" ~/.zshrc
 sudo apt-get -y install zsh
