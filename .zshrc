@@ -11,6 +11,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Aliases
 alias git=hub
+alias xclip='xclip -selection c'
 
 # Helper functions
 function git-pull-master() {

@@ -78,6 +78,9 @@ curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get -y install nodejs
 sudo ln -sfv /usr/bin/nodejs /usr/bin/node
 
+# Install xclip
+sudo apt-get -y install xclip
+
 # Optionally start work dotfiles setup
 function get-work-dotfiles() {
    git clone git@github.com:agentreno/workdotfiles
@@ -93,7 +96,7 @@ while true; do
    esac
 done
 
-# Zsh and oh-my-zsh Setup
+# LAST STEP! Zsh and oh-my-zsh Setup
 ln -sdv "$DOTFILES_DIR/.zshrc" ~/.zshrc
 sudo apt-get -y install zsh
 sh -c $DOTFILES_DIR/install-oh-my-zsh.sh
