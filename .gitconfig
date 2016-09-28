@@ -11,8 +11,10 @@
 	default = current
 [user]
 	name = Karl
-	email = kturrell@hotmail.com
+	email = karl.turrell@buto.tv
 [credential]
 	helper = cache --timeout=3600
 [core]
 	editor = vim
+[hub]
+	protocol = ssh
