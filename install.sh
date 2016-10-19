@@ -80,7 +80,7 @@ sudo apt-get -y install xclip
 function get-work-dotfiles() {
    git clone git@github.com:ButoVideo/workdotfiles
    cd workdotfiles
-   sh -c install.sh
+   ./install.sh
 }
 
 while true; do

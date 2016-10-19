@@ -24,7 +24,7 @@ git clone git@github.com:agentreno/dotfiles
 while true; do
     read -p "Do you want to install dotfiles? " yn
     case $yn in
-        [Yy]* ) cd dotfiles; sh -c install.sh; break;;
+        [Yy]* ) cd dotfiles; ./install.sh; break;;
         [Nn]* ) echo "Finished";;
         * ) echo "Please answer yes or no";;
     esac
