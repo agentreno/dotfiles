@@ -84,7 +84,8 @@ sudo apt-get -y install xclip
 # Optionally start work dotfiles setup
 function get-work-dotfiles() {
    git clone git@github.com:agentreno/workdotfiles
-   sh -c workdotfiles/install.sh
+   cd workdotfiles
+   sh -c install.sh
 }
 
 while true; do
@@ -95,6 +96,11 @@ while true; do
       * ) echo "Please answer yes or no";;
    esac
 done
+
+if [ "$(git config --global --get user.email)" == "" ]; then
+   read -p "What email address do you want to use for git commits?" gitemail
+   git config --global user.email $gitemail
+fi
 
 # LAST STEP! Zsh and oh-my-zsh Setup
 ln -sdv "$DOTFILES_DIR/.zshrc" ~/.zshrc
