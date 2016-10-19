@@ -5,7 +5,11 @@
 
 # Setup a new SSH key for Github
 cd ~/.ssh
-read -p "What email should be used for a new SSH key? " keyemail
+while true; do
+    read -p "What email should be used for a new SSH key? " keyemail
+    if [[ -n "$keyemail" ]]; then break; fi
+done
+
 ssh-keygen -t rsa -b 4096 -C $keyemail
 echo "The default key is: "
 cat ~/.ssh/id_rsa.pub
