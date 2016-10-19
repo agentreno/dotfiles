@@ -21,10 +21,6 @@ function report(){
 # Install curl
 sudo apt-get -y install curl
 
-# Install Git
-sudo apt-get update
-sudo apt-get -y install git
-
 # Update dotfiles itself and all of it's submodules
 report "Updating dotfiles and submodules"
 [ -d "$DOTFILES_DIR/.git" ] && git-alt $DOTFILES_DIR pull origin master
