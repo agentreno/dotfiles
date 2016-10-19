@@ -69,7 +69,6 @@ rm -rf hub-linux-amd64-2.2.3.tgz
 
 # Install Python
 report "Installing Python 2 and 3"
-sudo apt-get update
 sudo apt-get -y install python python3 python-pip python3-pip
 
 # Install Node
@@ -83,7 +82,7 @@ sudo apt-get -y install xclip
 
 # Optionally start work dotfiles setup
 function get-work-dotfiles() {
-   git clone git@github.com:agentreno/workdotfiles
+   git clone git@github.com:ButoVideo/workdotfiles
    cd workdotfiles
    sh -c install.sh
 }
@@ -98,7 +97,7 @@ while true; do
 done
 
 if [ "$(git config --global --get user.email)" == "" ]; then
-   read -p "What email address do you want to use for git commits?" gitemail
+   read -p "What email address do you want to use for git commits? " gitemail
    git config --global user.email $gitemail
 fi
 
