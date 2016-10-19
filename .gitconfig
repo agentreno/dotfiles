@@ -11,7 +11,6 @@
 	default = current
 [user]
 	name = Karl
-	email = karl.turrell@buto.tv
 [credential]
 	helper = cache --timeout=3600
 [core]
