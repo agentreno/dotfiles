@@ -2,7 +2,7 @@
 
 ## Quickstart
 
-Run `bash -c "$(wget -qO - https://github.com/agentreno/dotfiles/raw/master/bootstrap.sh)"
+Run `bash -c "$(wget -qO - https://github.com/agentreno/dotfiles/raw/master/bootstrap.sh)"`
 
 ## TODO
 1. Fix problem if .zshrc already exists
