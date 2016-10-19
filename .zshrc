@@ -42,6 +42,7 @@ function git-delete-branch() {
 
 # Credentials if they exist
 source ~/.credentials.sh 2> /dev/null
+source ~/dotfiles/workdotfiles/credentials.sh 2> /dev/null
 
 # Work dotfiles if they exist 
 source ~/dotfiles/workdotfiles/scripts.sh 2> /dev/null
