@@ -9,6 +9,6 @@ for 'added value'. Use my dotfiles at your own risk.
 
 ## TODO
 1. Fix problem if .zshrc already exists
-2. Pick out the best from Nitrous vim settings and incorporate
+2. Install autoenv
 3. Install httpie by default
 4. Install ngrok with github auth by default
