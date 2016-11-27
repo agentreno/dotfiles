@@ -4,6 +4,7 @@
 # SSH key
 
 # Setup a new SSH key for Github
+mkdir ~/.ssh
 cd ~/.ssh
 while true; do
     read -p "What email should be used for a new SSH key? " keyemail
