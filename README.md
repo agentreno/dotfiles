@@ -9,6 +9,4 @@ for 'added value'. Use my dotfiles at your own risk.
 
 ## TODO
 1. Fix problem if .zshrc already exists
-2. Install autoenv
-3. Install httpie by default
-4. Install ngrok with github auth by default
+2. Install ngrok with github auth by default
