@@ -67,6 +67,16 @@ rm -rf hub-linux-amd64-2.2.3.tgz
 report "Installing Python 2 and 3"
 sudo apt-get -y install python python3 python-pip python3-pip
 
+# Install both versions of ipython
+pip install ipython
+pip3 install ipython
+
+# Install virtualenv
+pip install virtualenv
+
+# Instal httpie
+pip install httpie
+
 # Install Node
 report "Installing Node 4.5.0"
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
