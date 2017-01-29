@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="gnzh"
 
 # Plugins
-plugins=(git vagrant)
+plugins=(git vagrant autoenv)
 
 source $ZSH/oh-my-zsh.sh
 

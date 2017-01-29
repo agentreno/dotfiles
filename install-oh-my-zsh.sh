@@ -80,6 +80,8 @@ main() {
     fi
   fi
 
+  git clone https://github.com/horosgrisa/autoenv ~/.oh-my-zsh/custom/plugins/autoenv
+
   printf "${GREEN}"
   echo 'Finished!'
   echo ''
