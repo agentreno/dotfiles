@@ -87,7 +87,7 @@ while true; do
    read -p "Do you want to install work dotfiles? " yn
    case $yn in
       [Yy]* ) report "Installing workdotfiles"; get-work-dotfiles; break;;
-      [Nn]* ) report "Continuing without work dotfiles";;
+      [Nn]* ) report "Continuing without work dotfiles"; break;;
       * ) echo "Please answer yes or no";;
    esac
 done
