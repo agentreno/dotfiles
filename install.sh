@@ -74,8 +74,11 @@ pip3 install ipython
 # Install virtualenv
 pip install virtualenv
 
-# Instal httpie
+# Install httpie
 pip install httpie
+
+# Install flake8
+pip install flake8
 
 # Install Node
 report "Installing Node 4.5.0"
