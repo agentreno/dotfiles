@@ -50,3 +50,8 @@ source ~/dotfiles/workdotfiles/scripts.sh 2> /dev/null
 # Environment variables
 export AWS_PROFILE=staging
 source /usr/local/bin/activate.sh
+
+# Autocompletions
+# hub
+fpath=(~/.zsh/completions $fpath) 
+autoload -U compinit && compinit
