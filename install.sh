@@ -79,6 +79,7 @@ pip install httpie
 
 # Install flake8
 pip install flake8
+ln -sfv "$DOTFILES_DIR/.flake8" ~/.config/flake8
 
 # Install Node
 report "Installing Node 4.5.0"
