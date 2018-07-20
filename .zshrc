@@ -49,9 +49,27 @@ source ~/dotfiles/workdotfiles/scripts.sh 2> /dev/null
 
 # Environment variables
 export AWS_PROFILE=staging
-source /usr/local/bin/activate.sh
+
+export NVM_DIR="/home/karl/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=/httpd
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+
+export PATH="/home/karl/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # Autocompletions
+# awless
+source <(awless completion zsh)
+source <(kubectl completion zsh)
+
 # hub
 fpath=(~/.zsh/completions $fpath) 
 autoload -U compinit && compinit
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$(python -m site --user-base)":$PATH
