@@ -15,6 +15,10 @@
       prompt: "What token should be used to create a new SSH key in Github?"
       private: yes
 
+    - name: "user_password"
+      prompt: "What should the user password be?"
+      private: yes
+
   tasks:
 
   - name: update apt
@@ -36,6 +40,8 @@
       generate_ssh_key: yes
       ssh_key_bits: 4096
       ssh_key_file: .ssh/id_rsa
+      password: "{{ user_password | password_hash('sha512') }}"
+      groups: "sudo"
 
   - name: register users SSH key with Github
     github_key:
@@ -134,3 +140,20 @@
         apt:
           name: xclip
 
+      - name: install zsh
+        become_user: root
+        apt:
+          name: zsh
+
+      - name: symlink zsh config
+        file:
+          path: /home/karl/.zshrc
+          src: /home/karl/dotfiles/.zshrc
+          state: link
+
+      - name: run zsh install
+        script: install-oh-my-zsh.sh
+        ignore_errors: yes
+
+      - name: set zsh as default shell
+        shell: sudo chsh karl -s /usr/bin/zsh
