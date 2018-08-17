@@ -1,0 +1,175 @@
+---
+
+- name: setup devbox
+  hosts: 127.0.0.1
+  connection: local
+  become: yes
+  gather_facts: no
+
+  vars_prompt:
+    - name: "git_email"
+      prompt: "What email should be used for Git commits?"
+      private: no
+
+    - name: "github_token"
+      prompt: "What token should be used to create a new SSH key in Github?"
+      private: yes
+
+  tasks:
+
+  - name: update apt
+    apt: update_cache=yes
+  - name: upgrade apt
+    apt: upgrade=yes
+
+  - name: install git
+    apt:
+      name: git
+
+  - name: set git email
+    command: git config --global user.email {{ git_email }}
+
+  - name: create my user
+    register: user_output
+    user:
+      name: karl
+      generate_ssh_key: yes
+      ssh_key_bits: 4096
+      ssh_key_file: .ssh/id_rsa
+
+  - name: register users SSH key with Github
+    github_key:
+      name: "ansible-devbox-{{ lookup('pipe', 'date +%d-%m-%Y-%H-%M-%S') }}"
+      token: "{{ github_token }}"
+      pubkey: "{{ user_output.ssh_public_key }}"
+
+  - name: continue as karl
+    become_user: karl
+    block:
+
+      - name: checkout dotfiles repo
+        git:
+          repo: ssh://git@github.com/agentreno/dotfiles.git
+          dest: /home/karl/dotfiles
+          accept_hostkey: yes
+
+      - name: install curl
+        apt:
+          name: curl
+
+      - name: install vim
+        apt:
+          name: vim
+
+      - name: symlink vimrc from dotfiles to home folder
+        file:
+          path: /home/karl/.vimrc
+          src: /home/karl/dotfiles/vimfiles/vimrc
+          state: link
+
+      - name: symlink vimrc from dotfiles to home folder
+        file:
+          path: /home/karl/.vim
+          src: /home/karl/dotfiles/vimfiles
+          state: link
+
+      - name: install tmux
+        apt:
+          name: tmux
+
+      - name: symlink tmux config from dotfiles to home folder
+        file:
+          path: /home/karl/.tmux.conf
+          src: /home/karl/dotfiles/.tmux.conf
+          state: link
+
+      - name: symlink git config
+        file:
+          path: /home/karl/.gitconfig
+          src: /home/karl/dotfiles/.gitconfig
+          state: link
+
+      - name: setup build environment for python
+        apt:
+          name: "{{ packages }}"
+        vars:
+          packages:
+          - make
+          - build-essential
+          - libssl-dev
+          - zlib1g-dev
+          - libbz2-dev
+          - libreadline-dev
+          - libsqlite3-dev
+          - wget
+          - curl
+          - llvm
+          - libncurses5-dev
+          - xz-utils
+          - tk-dev
+          - libxml2-dev
+          - libxmlsec1-dev
+          - libffi-dev
+
+      - name: install pyenv
+        shell: curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+
+      - name: setup pyenv
+        blockinfile:
+          path: /home/karl/.bashrc
+          block: |
+            export PATH="/home/karl/.pyenv/bin:$PATH"
+            eval "$(pyenv init -)"
+            eval "$(pyenv virtualenv-init -)"
+
+      - name: install python versions and set default
+        args:
+          executable: /bin/bash
+        shell: "{{ item }}"
+        with_items:
+          - source /home/karl/.bashrc
+          - /home/karl/.pyenv/bin/pyenv install 3.7.0
+          - /home/karl/.pyenv/bin/pyenv install 2.7.15
+          - /home/karl/.pyenv/bin/pyenv virtualenv 2.7.15 python2-tools
+          - /home/karl/.pyenv/bin/pyenv virtualenv 3.7.0 python3-tools
+          - /home/karl/.pyenv/bin/pyenv global 3.7.0 python3-tools python2-tools
+
+      - name: setup python2 tools
+        args:
+          executable: /bin/bash
+        shell: "{{ item }}"
+        with_items:
+          - source /home/karl/.bashrc
+          - /home/karl/.pyenv/bin/pyenv activate python2-tools
+          - /home/karl/.pyenv/shims/pip install flake8
+          - /home/karl/.pyenv/shims/pip install ipython
+          - /home/karl/.pyenv/bin/pyenv deactivate
+
+      - name: setup python3 tools
+        args:
+          executable: /bin/bash
+        shell: "{{ item }}"
+        with_items:
+          - source /home/karl/.bashrc
+          - /home/karl/.pyenv/bin/pyenv activate python3-tools
+          - /home/karl/.pyenv/shims/pip install flake8
+          - /home/karl/.pyenv/shims/pip install ipython
+          - /home/karl/.pyenv/shims/pip install httpie
+          - /home/karl/.pyenv/bin/pyenv deactivate
+
+      - name: make flake8 config directory
+        file:
+          path: /home/karl/.config
+          state: directory
+
+      - name: symlink flake8 config
+        file:
+          path: /home/karl/.config/flake8
+          src: /home/karl/dotfiles/.flake8
+          state: link
+
+      - name: install xclip
+        become_user: root
+        apt:
+          name: xclip
+
