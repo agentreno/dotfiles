@@ -90,6 +90,7 @@
           state: link
 
       - name: setup build environment for python
+        become_user: root
         apt:
           name: "{{ packages }}"
         vars:
@@ -115,47 +116,7 @@
         shell: curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
 
       - name: setup pyenv
-        blockinfile:
-          path: /home/karl/.bashrc
-          block: |
-            export PATH="/home/karl/.pyenv/bin:$PATH"
-            eval "$(pyenv init -)"
-            eval "$(pyenv virtualenv-init -)"
-
-      - name: install python versions and set default
-        args:
-          executable: /bin/bash
-        shell: "{{ item }}"
-        with_items:
-          - source /home/karl/.bashrc
-          - /home/karl/.pyenv/bin/pyenv install 3.7.0
-          - /home/karl/.pyenv/bin/pyenv install 2.7.15
-          - /home/karl/.pyenv/bin/pyenv virtualenv 2.7.15 python2-tools
-          - /home/karl/.pyenv/bin/pyenv virtualenv 3.7.0 python3-tools
-          - /home/karl/.pyenv/bin/pyenv global 3.7.0 python3-tools python2-tools
-
-      - name: setup python2 tools
-        args:
-          executable: /bin/bash
-        shell: "{{ item }}"
-        with_items:
-          - source /home/karl/.bashrc
-          - /home/karl/.pyenv/bin/pyenv activate python2-tools
-          - /home/karl/.pyenv/shims/pip install flake8
-          - /home/karl/.pyenv/shims/pip install ipython
-          - /home/karl/.pyenv/bin/pyenv deactivate
-
-      - name: setup python3 tools
-        args:
-          executable: /bin/bash
-        shell: "{{ item }}"
-        with_items:
-          - source /home/karl/.bashrc
-          - /home/karl/.pyenv/bin/pyenv activate python3-tools
-          - /home/karl/.pyenv/shims/pip install flake8
-          - /home/karl/.pyenv/shims/pip install ipython
-          - /home/karl/.pyenv/shims/pip install httpie
-          - /home/karl/.pyenv/bin/pyenv deactivate
+        script: setup_pyenv.sh
 
       - name: make flake8 config directory
         file:
