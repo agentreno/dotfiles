@@ -53,11 +53,6 @@ export AWS_PROFILE=staging
 export NVM_DIR="/home/karl/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=/httpd
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
-
 export PATH="/home/karl/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
