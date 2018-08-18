@@ -83,6 +83,10 @@ sudo ln -sfv /usr/bin/nodejs /usr/bin/node
 # Install xclip
 sudo apt-get -y install xclip
 
+# Install awless
+curl https://raw.githubusercontent.com/wallix/awless/master/getawless.sh | bash
+sudo mv awless /usr/local/bin
+
 # Optionally start work dotfiles setup
 function get-work-dotfiles() {
    git clone git@github.com:ButoVideo/workdotfiles
