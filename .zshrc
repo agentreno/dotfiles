@@ -58,6 +58,9 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 export PATH=$PATH:/usr/local/go/bin
+[ -d ~/go ] || mkdir ~/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$HOME/go/bin
 
 # Autocompletions
 # awless
