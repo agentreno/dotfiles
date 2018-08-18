@@ -87,6 +87,14 @@ sudo apt-get -y install xclip
 curl https://raw.githubusercontent.com/wallix/awless/master/getawless.sh | bash
 sudo mv awless /usr/local/bin
 
+# Install kubectl
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo touch /etc/apt/sources.list.d/kubernetes.list 
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+
 # Optionally start work dotfiles setup
 function get-work-dotfiles() {
    git clone git@github.com:ButoVideo/workdotfiles
