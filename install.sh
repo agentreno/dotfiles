@@ -109,6 +109,19 @@ sudo tar -C /usr/local -xzf go1.10.3.linux-amd64.tar.gz
 rm -rf go1.10.3.linux-amd64.tar.gz
 curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
+# Install docker
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce
 
 # Optionally start work dotfiles setup - removed until needed in a future role
 #function get-work-dotfiles() {
