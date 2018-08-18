@@ -64,21 +64,10 @@ rm -rf hub-linux-amd64-2.2.3
 rm -rf hub-linux-amd64-2.2.3.tgz
 
 # Install Python
-report "Installing Python 2 and 3"
-sudo apt-get -y install python python3 python-pip python3-pip
+curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+sh -c $DOTFILES_DIR/setup_pyenv.sh
 
-# Install both versions of ipython
-pip install ipython
-pip3 install ipython
-
-# Install virtualenv
-pip install virtualenv
-
-# Install httpie
-pip install httpie
-
-# Install flake8
-pip install flake8
+# Install flake8 config
 ln -sfv "$DOTFILES_DIR/.flake8" ~/.config/flake8
 
 # Install Node

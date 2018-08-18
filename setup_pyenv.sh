@@ -1,6 +1,8 @@
 #!/bin/bash
 
-export PATH="/home/karl/.pyenv/bin:$PATH"
+USER=${1:-`whoami`}
+
+export PATH="/home/$USER/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
