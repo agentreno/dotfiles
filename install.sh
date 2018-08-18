@@ -96,6 +96,13 @@ echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/a
 sudo apt-get update
 sudo apt-get install -y kubectl
 
+# Install virtualbox
+echo "deb https://download.virtualbox.org/virtualbox/debian xenial contrib" | sudo tee -a /etc/apt/sources.list.d/virtualbox.list
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install -y virtualbox-5.2
+
 # Optionally start work dotfiles setup - removed until needed in a future role
 #function get-work-dotfiles() {
 #   # Clone workdotfiles repo here
