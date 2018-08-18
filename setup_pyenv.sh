@@ -16,7 +16,7 @@ pip install ipython
 pyenv deactivate
 
 pyenv activate python3-tools
-pip instal flake8
+pip install flake8
 pip install ipython
 pip install httpie
 pyenv deactivate
