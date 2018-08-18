@@ -64,10 +64,14 @@ rm -rf hub-linux-amd64-2.2.3
 rm -rf hub-linux-amd64-2.2.3.tgz
 
 # Install Python
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+    libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+    xz-utils tk-dev libffi-dev liblzma-dev
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
 sh -c $DOTFILES_DIR/setup_pyenv.sh
 
 # Install flake8 config
+mkdir ~/.config
 ln -sfv "$DOTFILES_DIR/.flake8" ~/.config/flake8
 
 # Install Node
