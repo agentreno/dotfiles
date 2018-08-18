@@ -96,21 +96,21 @@ echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/a
 sudo apt-get update
 sudo apt-get install -y kubectl
 
-# Optionally start work dotfiles setup
-function get-work-dotfiles() {
-   git clone git@github.com:ButoVideo/workdotfiles
-   cd workdotfiles
-   ./install.sh
-}
+# Optionally start work dotfiles setup - removed until needed in a future role
+#function get-work-dotfiles() {
+#   # Clone workdotfiles repo here
+#   cd workdotfiles
+#   ./install.sh
+#}
 
-while true; do
-   read -p "Do you want to install work dotfiles? " yn
-   case $yn in
-      [Yy]* ) report "Installing workdotfiles"; get-work-dotfiles; break;;
-      [Nn]* ) report "Continuing without work dotfiles"; break;;
-      * ) echo "Please answer yes or no";;
-   esac
-done
+#while true; do
+#   read -p "Do you want to install work dotfiles? " yn
+#   case $yn in
+#      [Yy]* ) report "Installing workdotfiles"; get-work-dotfiles; break;;
+#      [Nn]* ) report "Continuing without work dotfiles"; break;;
+#      * ) echo "Please answer yes or no";;
+#   esac
+#done
 
 if [ "$(git config --global --get user.email)" == "" ]; then
    read -p "What email address do you want to use for git commits? " gitemail
