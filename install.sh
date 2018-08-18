@@ -103,10 +103,12 @@ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key a
 sudo apt-get update
 sudo apt-get install -y virtualbox-5.2
 
-# Install Golang
+# Install Golang and dep
 wget https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf go1.10.3.linux-amd64.tar.gz
 rm -rf go1.10.3.linux-amd64.tar.gz
+curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+
 
 # Optionally start work dotfiles setup - removed until needed in a future role
 #function get-work-dotfiles() {
