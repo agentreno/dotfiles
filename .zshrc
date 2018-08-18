@@ -57,6 +57,8 @@ export PATH="/home/karl/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+export PATH=$PATH:/usr/local/go/bin
+
 # Autocompletions
 # awless
 source <(awless completion zsh)
