@@ -48,7 +48,7 @@ source ~/dotfiles/workdotfiles/credentials.sh 2> /dev/null
 source ~/dotfiles/workdotfiles/scripts.sh 2> /dev/null
 
 # Environment variables
-export AWS_PROFILE=staging
+export AWS_PROFILE=personal
 
 export NVM_DIR="/home/karl/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
