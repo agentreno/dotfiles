@@ -1,4 +1,4 @@
 [submodule "vimfiles"]
 	path = vimfiles
-	url = git@github.com:agentreno/vimfiles
+	url = https://github.com/agentreno/vimfiles
 	branch = master
