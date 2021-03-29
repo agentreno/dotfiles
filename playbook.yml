@@ -184,3 +184,9 @@
       - name: set zsh as default shell
         become_user: root
         shell: chsh karl -s /usr/bin/zsh
+
+      - name: switch to zsh
+        shell: zsh
+
+      - name: reminders
+        shell: echo "Remember to register SSH key on Github"
