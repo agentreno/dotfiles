@@ -77,6 +77,21 @@
         apt:
           name: gh
 
+  - name: install docker ce
+    block:
+      - name: add github apt key
+        ansible.builtin.apt_key:
+          url: https://download.docker.com/linux/ubuntu/gpg
+          state: present
+      - name: add docker apt repo
+        ansible.builtin.apt_repository:
+          repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+      - name: update apt
+        apt: update_cache=yes
+      - name: install docker-ce apt package
+        apt:
+          name: docker-ce
+
   - name: set git email
     command: git config --global user.email {{ git_email }}
 
