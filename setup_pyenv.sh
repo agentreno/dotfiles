@@ -21,4 +21,6 @@ pyenv activate python3-tools
 pip install flake8
 pip install ipython
 pip install httpie
+pip install poetry
+pip install pipenv
 pyenv deactivate
