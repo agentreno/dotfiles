@@ -52,6 +52,7 @@ export PATH=$PATH:$HOME/go/bin
 # Autocompletions
 source <(awless completion zsh)
 source <(kubectl completion zsh)
+source <(gh completion -s zsh)
 autoload -U compinit && compinit
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
