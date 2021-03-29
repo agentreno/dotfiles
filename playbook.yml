@@ -157,6 +157,7 @@
 
       - name: setup pyenv
         script: /home/karl/dotfiles/setup_pyenv.sh
+        when: 0 > 1
 
       - name: make flake8 config directory
         file:
@@ -170,13 +171,6 @@
           state: link
           force: yes
 
-      - name: symlink zsh config
-        file:
-          path: /home/karl/.zshrc
-          src: /home/karl/dotfiles/.zshrc
-          state: link
-          force: yes
-
       - name: run zsh install
         script: /home/karl/dotfiles/install-oh-my-zsh.sh
         ignore_errors: yes
@@ -184,6 +178,13 @@
       - name: set zsh as default shell
         become_user: root
         shell: chsh karl -s /usr/bin/zsh
+
+      - name: symlink zsh config
+        file:
+          path: /home/karl/.zshrc
+          src: /home/karl/dotfiles/.zshrc
+          state: link
+          force: yes
 
       - name: switch to zsh
         shell: zsh
