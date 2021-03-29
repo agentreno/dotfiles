@@ -172,7 +172,6 @@
 
       - name: setup pyenv
         script: /home/karl/dotfiles/setup_pyenv.sh
-        when: 0 > 1
 
       - name: make flake8 config directory
         file:
