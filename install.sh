@@ -84,10 +84,6 @@ nvm install node
 # Install xclip
 sudo apt-get -y install xclip
 
-# Install awless
-curl https://raw.githubusercontent.com/wallix/awless/master/getawless.sh | bash
-sudo mv awless /usr/local/bin
-
 # Install kubectl
 sudo apt-get update && sudo apt-get install -y apt-transport-https
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -

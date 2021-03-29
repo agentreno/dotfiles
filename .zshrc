@@ -50,7 +50,6 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$HOME/go/bin
 
 # Autocompletions
-source <(awless completion zsh)
 source <(kubectl completion zsh)
 source <(gh completion -s zsh)
 autoload -U compinit && compinit
@@ -85,7 +84,5 @@ alias ci='circleci'
 alias grepdir='grep --exclude-dir={'.mypy_cache','.pytest_cache'} -nR'
 
 complete -C "$(which aws_completer)" aws
-export ANDROID_SDK=/home/karl/Android/Sdk
-export PATH=$ANDROID_SDK/platform-tools:$PATH
 export DEFAULT_USER=karl
 export PROMPT='$(kube_ps1)'$PROMPT

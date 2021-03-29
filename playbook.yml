@@ -26,6 +26,57 @@
     apt:
       name: git
 
+  - name: install curl
+    apt:
+      name: curl
+
+  - name: install vim
+    apt:
+      name: vim
+
+  - name: install tmux
+    apt:
+      name: tmux
+
+  - name: install xclip
+    apt:
+      name: xclip
+
+  - name: install zsh
+    apt:
+      name: zsh
+
+  - name: install kubectl
+    block:
+      - name: add google apt key
+        ansible.builtin.apt_key:
+          url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+          state: present
+      - name: add kubernetes apt repo
+        ansible.builtin.apt_repository:
+          repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+      - name: update apt
+        apt: update_cache=yes
+      - name: install kubectl package
+        apt:
+          name: kubectl
+
+  - name: install github cli
+    block:
+      - name: add github apt key
+        ansible.builtin.apt_key:
+          keyserver: keyserver.ubuntu.com
+          id: C99B11DEB97541F0
+          state: present
+      - name: add github apt repo
+        ansible.builtin.apt_repository:
+          repo: deb https://cli.github.com/packages bionic main
+      - name: update apt
+        apt: update_cache=yes
+      - name: install github cli apt package
+        apt:
+          name: gh
+
   - name: set git email
     command: git config --global user.email {{ git_email }}
 
@@ -49,41 +100,33 @@
           dest: /home/karl/dotfiles
           accept_hostkey: yes
 
-      - name: install curl
-        apt:
-          name: curl
-
-      - name: install vim
-        apt:
-          name: vim
-
       - name: symlink vimrc from dotfiles to home folder
         file:
           path: /home/karl/.vimrc
           src: /home/karl/dotfiles/vimfiles/vimrc
           state: link
+          force: yes
 
       - name: symlink vimrc from dotfiles to home folder
         file:
           path: /home/karl/.vim
           src: /home/karl/dotfiles/vimfiles
           state: link
-
-      - name: install tmux
-        apt:
-          name: tmux
+          force: yes
 
       - name: symlink tmux config from dotfiles to home folder
         file:
           path: /home/karl/.tmux.conf
           src: /home/karl/dotfiles/.tmux.conf
           state: link
+          force: yes
 
       - name: symlink git config
         file:
           path: /home/karl/.gitconfig
           src: /home/karl/dotfiles/.gitconfig
           state: link
+          force: yes
 
       - name: setup build environment for python
         become_user: root
@@ -110,9 +153,10 @@
 
       - name: install pyenv
         shell: curl https://pyenv.run | bash
+        ignore_errors: yes
 
       - name: setup pyenv
-        script: /home/karl/setup_pyenv.sh
+        script: /home/karl/dotfiles/setup_pyenv.sh
 
       - name: make flake8 config directory
         file:
@@ -124,26 +168,19 @@
           path: /home/karl/.config/flake8
           src: /home/karl/dotfiles/.flake8
           state: link
-
-      - name: install xclip
-        become_user: root
-        apt:
-          name: xclip
-
-      - name: install zsh
-        become_user: root
-        apt:
-          name: zsh
+          force: yes
 
       - name: symlink zsh config
         file:
           path: /home/karl/.zshrc
           src: /home/karl/dotfiles/.zshrc
           state: link
+          force: yes
 
       - name: run zsh install
-        script: install-oh-my-zsh.sh
+        script: /home/karl/dotfiles/install-oh-my-zsh.sh
         ignore_errors: yes
 
       - name: set zsh as default shell
-        shell: sudo chsh karl -s /usr/bin/zsh
+        become_user: root
+        shell: chsh karl -s /usr/bin/zsh
