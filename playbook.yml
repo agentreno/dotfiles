@@ -200,9 +200,3 @@
           src: /home/karl/dotfiles/.zshrc
           state: link
           force: yes
-
-      - name: switch to zsh
-        shell: zsh
-
-      - name: reminders
-        shell: echo "Remember to register SSH key on Github"
