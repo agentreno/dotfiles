@@ -11,10 +11,6 @@
       prompt: "What email should be used for Git commits?"
       private: no
 
-    - name: "github_token"
-      prompt: "What token should be used to create a new SSH key in Github?"
-      private: yes
-
     - name: "user_password"
       prompt: "What should the user password be?"
       private: yes
@@ -43,19 +39,13 @@
       password: "{{ user_password | password_hash('sha512') }}"
       groups: "sudo"
 
-  - name: register users SSH key with Github
-    github_key:
-      name: "ansible-devbox-{{ lookup('pipe', 'date +%d-%m-%Y-%H-%M-%S') }}"
-      token: "{{ github_token }}"
-      pubkey: "{{ user_output.ssh_public_key }}"
-
   - name: continue as karl
     become_user: karl
     block:
 
       - name: checkout dotfiles repo
         git:
-          repo: ssh://git@github.com/agentreno/dotfiles.git
+          repo: https://github.com/agentreno/dotfiles
           dest: /home/karl/dotfiles
           accept_hostkey: yes
 
@@ -119,10 +109,10 @@
           - libffi-dev
 
       - name: install pyenv
-        shell: curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+        shell: curl https://pyenv.run | bash
 
       - name: setup pyenv
-        script: setup_pyenv.sh
+        script: /home/karl/setup_pyenv.sh
 
       - name: make flake8 config directory
         file:
