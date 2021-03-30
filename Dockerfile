@@ -8,6 +8,9 @@ RUN apt-get update && apt-get -y install sudo
 RUN sed -i '/%sudo/ s/.*/%sudo ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 USER karl
 
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 WORKDIR /home/karl
 COPY --chown=karl:karl . ./
 

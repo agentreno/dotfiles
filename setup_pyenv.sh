@@ -6,11 +6,11 @@ export PATH="/home/$USER/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-pyenv install 3.7.0
-pyenv install 2.7.15
-pyenv virtualenv 2.7.15 python2-tools
-pyenv virtualenv 3.7.0 python3-tools
-pyenv global 3.7.0 python3-tools python2-tools
+pyenv install 3.9.2
+pyenv install 2.7.18
+pyenv virtualenv 2.7.18 python2-tools
+pyenv virtualenv 3.9.2 python3-tools
+pyenv global 3.9.2 python3-tools python2-tools
 
 pyenv activate python2-tools
 pip install flake8
