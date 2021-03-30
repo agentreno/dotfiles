@@ -1,0 +1,12 @@
+name: test-dotfiles
+on:
+  push:
+    tags: v*
+jobs:
+  run-dotfiles:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./bootstrap-ansible.sh test
+      - uses: mitre/inspec_tools_action@v1.0
+      - run: inspec exec test/inspec.rb
