@@ -10,3 +10,5 @@ jobs:
       - run: ./bootstrap-ansible.sh test
       - run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
       - run: inspec exec test/inspec.rb
+        env:
+          CHEF_LICENSE: accept-no-persist
