@@ -8,5 +8,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: ./bootstrap-ansible.sh test
-      - uses: mitre/inspec_tools_action@v1.0
+      - run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
       - run: inspec exec test/inspec.rb
