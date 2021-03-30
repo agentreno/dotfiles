@@ -9,6 +9,6 @@ jobs:
       - uses: actions/checkout@v2
       - run: ./bootstrap-ansible.sh test
       - run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
-      - run: inspec exec test/inspec.rb
+      - run: inspec exec tests/inspec.rb
         env:
           CHEF_LICENSE: accept-no-persist
