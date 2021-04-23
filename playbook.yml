@@ -120,6 +120,12 @@
       password: "{{ user_password | password_hash('sha512') }}"
       groups: "sudo"
 
+  - name: add user to docker group
+    user:
+      name: "{{ user_name }}"
+      groups: docker
+      append: yes
+
   - name: continue as karl
     become_user: "{{ user_name }}"
     block:
