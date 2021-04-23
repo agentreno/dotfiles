@@ -189,8 +189,12 @@
           - libffi-dev
 
       - name: install pyenv
-        shell: curl https://pyenv.run | bash
         ignore_errors: yes
+        block:
+          - name: clear existing pyenv
+            shell: rm -rf ~/.pyenv
+          - name: install pyenv
+            shell: curl https://pyenv.run | bash
 
       - name: setup pyenv
         script: /home/{{ user_name }}/dotfiles/setup_pyenv.sh
@@ -209,8 +213,10 @@
 
       - name: run zsh install
         block:
-          - shell: rm -rf ~/.oh-my-zsh
-          - script: /home/{{ user_name }}/dotfiles/install-oh-my-zsh.sh
+          - name: clear existing ohmyzsh
+            shell: rm -rf ~/.oh-my-zsh
+          - name: install ohmyzsh
+            script: /home/{{ user_name }}/dotfiles/install-oh-my-zsh.sh
             ignore_errors: yes
 
       - name: set zsh as default shell
