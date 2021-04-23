@@ -15,6 +15,14 @@
       prompt: "What should the user password be?"
       private: yes
 
+    - name: "create_user"
+      prompt: "Should a new user be created?"
+      private: no
+
+    - name: "user_name"
+      prompt: "What is the existing or new user name?"
+      private: no
+
   tasks:
 
   - name: update apt
@@ -92,13 +100,20 @@
         apt:
           name: docker-ce
 
+  - name: install minikube
+    get_url:
+      url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+      dest: /usr/local/bin/minikube
+      mode: a+rx
+
   - name: set git email
     command: git config --global user.email {{ git_email }}
 
   - name: create my user
+    when: create_user == "yes"
     register: user_output
     user:
-      name: karl
+      name: "{{ user_name }}"
       generate_ssh_key: yes
       ssh_key_bits: 4096
       ssh_key_file: .ssh/id_rsa
@@ -106,40 +121,40 @@
       groups: "sudo"
 
   - name: continue as karl
-    become_user: karl
+    become_user: "{{ user_name }}"
     block:
 
       - name: checkout dotfiles repo
         git:
           repo: https://github.com/agentreno/dotfiles
-          dest: /home/karl/dotfiles
+          dest: /home/{{ user_name }}/dotfiles
           accept_hostkey: yes
 
       - name: symlink vimrc from dotfiles to home folder
         file:
-          path: /home/karl/.vimrc
-          src: /home/karl/dotfiles/vimfiles/vimrc
+          path: /home/{{ user_name }}/.vimrc
+          src: /home/{{ user_name }}/dotfiles/vimfiles/vimrc
           state: link
           force: yes
 
       - name: symlink vimrc from dotfiles to home folder
         file:
-          path: /home/karl/.vim
-          src: /home/karl/dotfiles/vimfiles
+          path: /home/{{ user_name }}/.vim
+          src: /home/{{ user_name }}/dotfiles/vimfiles
           state: link
           force: yes
 
       - name: symlink tmux config from dotfiles to home folder
         file:
-          path: /home/karl/.tmux.conf
-          src: /home/karl/dotfiles/.tmux.conf
+          path: /home/{{ user_name }}/.tmux.conf
+          src: /home/{{ user_name }}/dotfiles/.tmux.conf
           state: link
           force: yes
 
       - name: symlink git config
         file:
-          path: /home/karl/.gitconfig
-          src: /home/karl/dotfiles/.gitconfig
+          path: /home/{{ user_name }}/.gitconfig
+          src: /home/{{ user_name }}/dotfiles/.gitconfig
           state: link
           force: yes
 
@@ -171,31 +186,31 @@
         ignore_errors: yes
 
       - name: setup pyenv
-        script: /home/karl/dotfiles/setup_pyenv.sh
+        script: /home/{{ user_name }}/dotfiles/setup_pyenv.sh
 
       - name: make flake8 config directory
         file:
-          path: /home/karl/.config
+          path: /home/{{ user_name }}/.config
           state: directory
 
       - name: symlink flake8 config
         file:
-          path: /home/karl/.config/flake8
-          src: /home/karl/dotfiles/.flake8
+          path: /home/{{ user_name }}/.config/flake8
+          src: /home/{{ user_name }}/dotfiles/.flake8
           state: link
           force: yes
 
       - name: run zsh install
-        script: /home/karl/dotfiles/install-oh-my-zsh.sh
+        script: /home/{{ user_name }}/dotfiles/install-oh-my-zsh.sh
         ignore_errors: yes
 
       - name: set zsh as default shell
         become_user: root
-        shell: chsh karl -s /usr/bin/zsh
+        shell: chsh {{ user_name }} -s /usr/bin/zsh
 
       - name: symlink zsh config
         file:
-          path: /home/karl/.zshrc
-          src: /home/karl/dotfiles/.zshrc
+          path: /home/{{ user_name }}/.zshrc
+          src: /home/{{ user_name }}/dotfiles/.zshrc
           state: link
           force: yes
