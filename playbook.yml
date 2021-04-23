@@ -125,6 +125,7 @@
     block:
 
       - name: checkout dotfiles repo
+        ignore_errors: yes
         git:
           repo: https://github.com/agentreno/dotfiles
           dest: /home/{{ user_name }}/dotfiles
@@ -201,8 +202,10 @@
           force: yes
 
       - name: run zsh install
-        script: /home/{{ user_name }}/dotfiles/install-oh-my-zsh.sh
-        ignore_errors: yes
+        block:
+          - shell: rm -rf ~/.oh-my-zsh
+          - script: /home/{{ user_name }}/dotfiles/install-oh-my-zsh.sh
+            ignore_errors: yes
 
       - name: set zsh as default shell
         become_user: root
