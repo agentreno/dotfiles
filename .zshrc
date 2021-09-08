@@ -56,7 +56,6 @@ autoload -U compinit && compinit
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$(python -m site --user-base)":$PATH
-eval "$(pipenv --completion)"
 
 function refresh-container() {
    if [[ -z "$1" ]]; then
