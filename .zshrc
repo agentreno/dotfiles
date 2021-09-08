@@ -40,9 +40,9 @@ export AWS_PROFILE=personal
 export NVM_DIR="/home/karl/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export PATH="/home/karl/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 
 export PATH=$PATH:/usr/local/go/bin
 [ -d ~/go ] || mkdir ~/go
