@@ -11,10 +11,6 @@
       prompt: "What email should be used for Git commits?"
       private: no
 
-    - name: "user_password"
-      prompt: "What should the user password be?"
-      private: yes
-
     - name: "create_user"
       prompt: "Should a new user be created?"
       private: no
@@ -109,6 +105,13 @@
   - name: set git email
     command: git config --global user.email {{ git_email }}
 
+  - name: get new user password
+    when: create_user == "yes"
+    register: user_password
+    ansible.builtin.pause:
+      prompt: "Enter a new user password"
+      echo: no
+
   - name: create my user
     when: create_user == "yes"
     register: user_output
@@ -117,7 +120,7 @@
       generate_ssh_key: yes
       ssh_key_bits: 4096
       ssh_key_file: .ssh/id_rsa
-      password: "{{ user_password | password_hash('sha512') }}"
+      password: "{{ user_password.user_input | password_hash('sha512') }}"
       groups: "sudo"
 
   - name: add user to docker group
