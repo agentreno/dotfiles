@@ -95,6 +95,18 @@
       - name: install docker-ce apt package
         apt:
           name: docker-ce
+      - name: install docker-compose-plugin apt package
+        apt:
+          name: docker-compose-plugin
+      - name: create docker user group
+        ansible.builtin.group:
+          name: docker
+          state: present
+      - name: add user to docker user group
+        ansible.builtin.user:
+          name: "{{ user_name }}"
+          groups: docker
+          append: yes
 
   - name: install minikube
     get_url:
