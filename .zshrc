@@ -52,7 +52,6 @@ export PATH=$PATH:$HOME/go/bin
 # Autocompletions
 source <(kubectl completion zsh)
 source <(gh completion -s zsh)
-autoload -U compinit && compinit
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$(python -m site --user-base)":$PATH
@@ -85,3 +84,11 @@ alias grepdir='grep --exclude-dir={'.mypy_cache','.pytest_cache'} -nR'
 complete -C "$(which aws_completer)" aws
 export DEFAULT_USER=karl
 export PROMPT='$(kube_ps1)'$PROMPT
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/karl/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/karl/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/karl/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/karl/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
